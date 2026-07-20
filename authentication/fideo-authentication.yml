@@ -1,0 +1,49 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.fideo.ai/docs/authorization
+docs: https://docs.fideo.ai/docs/authorization
+description: >-
+  Every request to the Fideo Verify and Signals API (https://api.fideo.ai)
+  authenticates with a bearer API key supplied in the HTTP Authorization header.
+  Keys are managed inside the ReadMe-hosted developer hub (Settings -> API Keys)
+  or issued by the Fideo support team for dedicated test/production credentials.
+  There is no OAuth2 / OpenID Connect flow and no per-request signing; the static
+  key is scoped per workspace and inherits the account's contracted rate limits.
+summary:
+  types:
+  - http
+  http_schemes:
+  - bearer
+  oauth2_flows: []
+  api_key_in: []
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: >-
+    Authorization: Bearer {API_KEY} — required on every Verify and Signals
+    request. Keys are provisioned/rotated in ReadMe; separate keys per
+    environment (prod/staging) and per workflow are recommended. Never embed
+    keys in client-side code; proxy calls through a backend you control.
+  sources:
+  - https://docs.fideo.ai/docs/authorization
+required_headers:
+- header: Authorization
+  value: Bearer {API_KEY}
+  required: true
+- header: Content-Type
+  value: application/json
+  required: true
+- header: Accept
+  value: application/json
+  required: false
+auth_errors:
+- status: 401
+  meaning: Missing or invalid/revoked API key.
+- status: 403
+  meaning: Key exists but is not entitled for the requested product (Verify or Signals).
+key_management:
+- Create separate keys per environment (prod vs staging) and per workflow/service.
+- Never embed keys in client-side code; originate calls from a secure backend.
+- Rotate regularly; keep two active keys per environment for zero-downtime rotation.
+- Store keys in a secret manager (Vault, AWS Secrets Manager) and inject via env vars.
