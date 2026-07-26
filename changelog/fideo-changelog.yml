@@ -1,0 +1,15 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.fideo.ai/changelog
+description: >-
+  Fideo maintains a dated changelog on its ReadMe developer hub. At capture time
+  the public changelog surfaced a single published entry; the recent window is
+  recorded below. The live changelog is the source of truth.
+changelog_url: https://docs.fideo.ai/changelog
+scheme: dated-entries
+entries:
+- title: Welcome to Fideo
+  url: https://docs.fideo.ai/changelog/welcome-to-fideo
+  breaking: false
+  highlights:
+  - Launch of the Fideo developer hub and Verify / Signals API documentation.

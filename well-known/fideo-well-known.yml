@@ -1,0 +1,45 @@
+generated: '2026-07-19'
+method: searched
+description: >-
+  Results of probing the /.well-known/ discovery surface for the Fideo API host
+  (api.fideo.ai), the marketing host (www.fideo.ai), and the docs host
+  (docs.fideo.ai) on 2026-07-19. No well-known documents are published; every
+  probed path returned 404 (docs.fideo.ai answered 429 for /security.txt behind
+  a Cloudflare challenge). Absence is valid, recorded data.
+hosts:
+- host: https://api.fideo.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://www.fideo.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://docs.fideo.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404

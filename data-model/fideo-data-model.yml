@@ -1,0 +1,78 @@
+generated: '2026-07-19'
+method: derived
+source: >-
+  https://docs.fideo.ai/docs/inputs-and-authorization,
+  https://docs.fideo.ai/docs/multi-field-inputs,
+  https://docs.fideo.ai/docs/verify,
+  https://docs.fideo.ai/docs/session — derived from the documented request
+  (MultiFieldReq) and Verify response schema. No OpenAPI is published, so the
+  entity graph is derived from the documented JSON structures rather than
+  $ref links.
+description: >-
+  Entity-relationship model of the Fideo Verify and Signals API. A Query is the
+  central request entity (the shared MultiFieldReq of identifiers); a Verify
+  Query yields a VerifyResult (overall risk score plus a set of Checks grouped
+  by CheckPackage); Signals Queries yield SignalBundles. Multiple Queries for one
+  user's workflow can be grouped into a billable Session.
+entities:
+- name: Query
+  description: A single request carrying one or more identifiers (MultiFieldReq), shared by Verify and Signals.
+  fields:
+  - emails
+  - phones
+  - ssns
+  - name
+  - location
+  - ipAddress
+  - birthday
+  - sessionId
+  - countries
+  - excludedCountries
+- name: Session
+  description: Groups multiple queries for one user's workflow into a single billable unit.
+  id_field: sessionId
+- name: VerifyResult
+  description: Response of POST /verify — an overall risk score plus per-check results.
+  fields:
+  - risk
+  - checks
+- name: Check
+  description: One identity/risk check result within a VerifyResult.
+  fields:
+  - id
+  - name
+  - description
+  - state
+  - risk
+  - checkPackage
+- name: CheckPackage
+  description: >-
+    A named grouping of related checks. Documented packages include Breached,
+    Digital, Email, Identity, Location, Network Intelligence, Phone, Synthetic,
+    Threat Scan, Validation, and Global Watch.
+- name: SignalBundle
+  description: >-
+    Response of POST /signals — modular identity-intelligence signals. Documented
+    bundles: Person, Email, Location, Professional, IP Address, Phone, Social,
+    and Economic signals (plus beta Signal Patterns / Time Series).
+relationships:
+- from: Session
+  to: Query
+  type: has_many
+  via: sessionId
+- from: Query
+  to: VerifyResult
+  type: has_one
+  via: request/response
+- from: VerifyResult
+  to: Check
+  type: has_many
+  via: checks
+- from: Check
+  to: CheckPackage
+  type: belongs_to
+  via: checkPackage
+- from: Query
+  to: SignalBundle
+  type: has_many
+  via: request/response

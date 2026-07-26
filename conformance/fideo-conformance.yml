@@ -1,0 +1,48 @@
+generated: '2026-07-19'
+method: searched
+source: >-
+  https://www.fideo.ai (company overview / security posture),
+  https://docs.fideo.ai/docs/authorization,
+  https://docs.fideo.ai/docs/verify (sanctions/watchlist checks),
+  https://www.fideo.ai/data-security-exhibit/
+description: >-
+  Industry and cross-cutting standards the Fideo API conforms to, derived from
+  documented behavior and published compliance posture. Fideo publishes a SOC 2
+  Type II attestation and is enterprise TPRM-ready; it screens identities
+  against multiple government sanctions/watchlists as part of Verify.
+standards:
+- id: bearer-token-auth
+  conforms: true
+  evidence: All requests authenticate with an Authorization bearer API key (docs.fideo.ai/docs/authorization).
+- id: oauth2
+  conforms: false
+  evidence: No OAuth2 authorization flow documented; authentication is a static bearer key.
+- id: oidc
+  conforms: false
+  evidence: No /.well-known/openid-configuration on the API host; no OIDC discovery.
+- id: soc2-type-ii
+  conforms: true
+  evidence: >-
+    Fideo Intelligence states it is SOC 2 Type II certified and enterprise
+    TPRM-ready with third-party risk-management audits completed (www.fideo.ai).
+- id: ofac-sanctions-screening
+  conforms: true
+  evidence: >-
+    Verify runs OFAC, EU, UK, UN, and Canada sanction-list checks
+    (IDENTITY_OFAC_LIST, IDENTITY_EU_SANCTION_LIST, IDENTITY_UK_SANCTION_LIST,
+    IDENTITY_UN_SANCTION_LIST, IDENTITY_CA_SANCTION_LIST).
+- id: kyc-aml
+  conforms: true
+  evidence: >-
+    Verify supports KYC/CIP/CDD and AML use cases (identity, sanctions, breach,
+    synthetic-identity checks) for banks, credit unions, and fintechs
+    (docs.fideo.ai/docs/verify).
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use standard HTTP status codes with JSON, not application/problem+json.
+- id: idempotency
+  conforms: false
+  evidence: No Idempotency-Key contract documented (synchronous scoring API).
+- id: pagination
+  conforms: false
+  evidence: No list endpoints / pagination documented.

@@ -1,0 +1,29 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.fideo.ai/docs/authorization
+format: http-status
+description: >-
+  API-level error responses documented for the Fideo Verify and Signals
+  endpoints. Fideo returns standard HTTP status codes with JSON bodies; it does
+  not advertise an RFC 9457 application/problem+json envelope. Product-level
+  results (per-check risk states) are documented per check/signal page, not as
+  API errors.
+envelope:
+  content_type: application/json
+  note: >-
+    Authentication and rate-limit failures return the HTTP status below.
+    Successful Verify calls return a 200 with a risk score and checks[]; a per-
+    check "state"/"risk" (NONE/LOW/MED/HIGH) conveys business-level signal.
+problems:
+- status: 401
+  title: Unauthorized
+  meaning: The Authorization header is absent or the API key was revoked/invalid.
+  remediation: Verify the token value and environment; re-issue the key in ReadMe if revoked.
+- status: 403
+  title: Forbidden
+  meaning: The key exists but is not enabled for the requested product (Verify or Signals).
+  remediation: Contact Fideo support to adjust product entitlements for the key.
+- status: 429
+  title: Too Many Requests
+  meaning: The per-key / per-endpoint rate limit for the contracted plan was exceeded.
+  remediation: Back off and retry with exponential delay.

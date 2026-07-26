@@ -1,8 +1,33 @@
 aid: fideo
 name: Fideo
-description: 'Fideo is a company surfaced as a portfolio company of foundry-group and added to the API
-  Evangelist network as a stub for enrichment. Sector: ai. This profile is a lead awaiting the enrichment
-  pipeline.'
+description: >-
+  Fideo Intelligence is a Denver-based identity intelligence and fraud-prevention
+  platform, spun out of FullContact in 2024 and backed by Foundry Group, Baird
+  Capital, and Blue Note Ventures. Fideo turns fragmented personal identifiers —
+  email, phone, SSN, name, postal address, IP address, and social handles — into
+  real-time fraud and identity-verification signals drawn from an identity graph
+  spanning billions of identities. Its two products, Verify (a single-call,
+  real-time identity-verification and risk-scoring API that runs dozens of checks
+  across breach, sanctions/watchlist, email, phone, location, device, and
+  synthetic-identity dimensions) and Signals (modular identity-intelligence
+  bundles that enrich existing fraud models), serve banks, credit unions,
+  neobanks, fintechs, payments companies, and financial-crime and compliance
+  teams for KYC, AML, onboarding, account-takeover, and payment-fraud use cases.
+  The REST API is served at https://api.fideo.ai with bearer API-key
+  authentication and JSON payloads, and is documented on a ReadMe developer hub.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.fideo.ai/wp-content/uploads/2024/10/preview-thumb-fideo-1200px.png
 url: https://raw.githubusercontent.com/api-evangelist/fideo/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,16 +37,103 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
-- Ai
-apis: []
+- AI
+- Identity Verification
+- Fraud Prevention
+- Fraud Detection
+- Identity Intelligence
+- KYC
+- AML
+- Financial Crime
+- Compliance
+- Fintech
+- Sanctions Screening
+- Risk Scoring
+apis:
+- name: Fideo Verify & Signals API
+  description: >-
+    Fideo's real-time REST API for identity verification, fraud risk scoring, and
+    identity intelligence. Two endpoints share a common multi-field request
+    schema: POST /verify runs a comprehensive suite of identity and risk checks
+    and returns a 0–1 risk score with per-check results; POST /signals returns
+    modular identity-intelligence bundles (person, email, phone, location, IP,
+    professional, social, and economic signals). Bearer API-key authentication;
+    JSON request and response bodies.
+  humanURL: https://docs.fideo.ai
+  baseURL: https://api.fideo.ai
+  tags:
+  - Identity Verification
+  - Fraud Prevention
+  - Risk Scoring
+  - Identity Intelligence
+  properties:
+  - type: Documentation
+    url: https://docs.fideo.ai
+  - type: APIReference
+    url: https://docs.fideo.ai/docs/verify
+  - type: GettingStarted
+    url: https://docs.fideo.ai/docs/getting-started
+  - type: Authentication
+    url: authentication/fideo-authentication.yml
+  - type: Conventions
+    url: conventions/fideo-conventions.yml
+  - type: ErrorCatalog
+    url: errors/fideo-problem-types.yml
+  - type: DataModel
+    url: data-model/fideo-data-model.yml
+  - type: Sandbox
+    url: sandbox/fideo-sandbox.yml
+  - type: MCPServer
+    url: mcp/fideo-mcp.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/fideo-domain-security.yml
 - type: Website
   url: https://www.fideo.ai
+- type: DeveloperPortal
+  url: https://docs.fideo.ai
+- type: Documentation
+  url: https://docs.fideo.ai
+- type: APIReference
+  url: https://docs.fideo.ai/docs/verify
+- type: GettingStarted
+  url: https://docs.fideo.ai/docs/getting-started
+- type: SignUp
+  url: https://www.fideo.ai/tryverify/
+- type: Support
+  url: https://www.fideo.ai/contact-us/
+- type: Blog
+  url: https://www.fideo.ai/resources/
+- type: LLMsTxt
+  url: llms/fideo-llms.txt
+- type: ChangeLog
+  url: changelog/fideo-changelog.yml
+- type: Lifecycle
+  url: lifecycle/fideo-lifecycle.yml
+- type: Authentication
+  url: authentication/fideo-authentication.yml
+- type: Conformance
+  url: conformance/fideo-conformance.yml
+- type: Compliance
+  url: conformance/fideo-conformance.yml
+- type: WellKnown
+  url: well-known/fideo-well-known.yml
+- type: TermsOfService
+  url: https://www.fideo.ai/legal/terms-of-use/
+- type: PrivacyPolicy
+  url: https://www.fideo.ai/privacy/privacy-policy/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/fideointelligence
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

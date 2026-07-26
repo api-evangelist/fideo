@@ -1,0 +1,32 @@
+generated: '2026-07-19'
+method: searched
+source: >-
+  https://docs.fideo.ai/docs/authorization,
+  https://docs.fideo.ai/docs/inputs-and-authorization,
+  https://docs.fideo.ai/docs/create-api-key
+description: >-
+  Test-vs-production separation for the Fideo API. Fideo does not publish a
+  distinct sandbox host or a public set of "magic" test identifiers; instead,
+  isolation is achieved with separate API keys per environment. Dedicated
+  test/production credentials are issued by the Fideo support team, and keys can
+  be rotated to isolate sandbox versus production traffic.
+test_vs_live:
+  mechanism: Separate bearer API keys per environment (no separate sandbox host).
+  host: https://api.fideo.ai (same host for test and production)
+  provisioning: >-
+    Keys managed in ReadMe (Settings -> API Keys); dedicated test/prod
+    credentials available from Fideo support.
+  rotation: Keys can be revoked/rotated to isolate sandbox versus production traffic.
+test_values:
+  published: false
+  note: >-
+    No public catalog of test emails/phones/SSNs is documented. Documentation
+    examples use placeholder identifiers (e.g. a 64-character all-'a' string in
+    the ssns field to represent a SHA-256 hash) — these are illustrative, not
+    guaranteed test fixtures.
+poc_tooling:
+  input_template: fideo_input_format.xlsx
+  note: >-
+    A proof-of-concept Excel input template documents supported fields
+    (Record_Id, Email, Phone, SSN, name components, address, DOB, IP,
+    organization, title) with MD5/SHA256 hashing options for sensitive data.

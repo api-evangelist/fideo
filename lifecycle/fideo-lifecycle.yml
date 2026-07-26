@@ -1,0 +1,28 @@
+generated: '2026-07-19'
+method: searched
+source: >-
+  https://docs.fideo.ai/docs/authorization, https://docs.fideo.ai/changelog —
+  versioning and lifecycle signals observed in the developer hub.
+description: >-
+  Lifecycle posture of the Fideo API. Fideo does not publish an explicit
+  versioning policy, deprecation/Sunset-header policy, SLA document, or a
+  dedicated public status page (the docs host is served on ReadMe, whose own
+  platform status page is not Fideo's). Changes are communicated via the ReadMe
+  changelog. Recorded conservatively — no StatusPage or Deprecation pointer is
+  wired because none is published.
+versioning:
+  scheme: unversioned host path
+  current: https://api.fideo.ai (endpoints /verify, /signals)
+  docs: https://docs.fideo.ai/docs/authorization
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  note: No published deprecation/Sunset policy found.
+sla:
+  url: null
+  note: No public SLA / uptime target found (enterprise contracts only).
+status_page:
+  url: null
+  note: No dedicated Fideo status page found; developer hub runs on ReadMe.
+changelog: https://docs.fideo.ai/changelog
+deprecated_operations: []

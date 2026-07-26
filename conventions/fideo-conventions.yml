@@ -1,0 +1,85 @@
+generated: '2026-07-19'
+method: searched
+source: >-
+  https://docs.fideo.ai/docs/authorization,
+  https://docs.fideo.ai/docs/inputs-and-authorization,
+  https://docs.fideo.ai/docs/verify — cross-cutting request/response semantics
+  that apply to both Verify and Signals endpoints.
+description: >-
+  How the Fideo REST API behaves across its operations: authentication style,
+  the shared multi-field request model, the JSON response envelope, and
+  rate-limit signaling. Fideo's API is a synchronous request/response scoring
+  API — it does not document idempotency keys, cursor pagination, field
+  expansion, or webhooks, so those conventions are recorded as not-applicable
+  rather than fabricated.
+base_url: https://api.fideo.ai
+api_style: REST over HTTPS, JSON request and response bodies (UTF-8)
+
+authentication:
+  scheme: 'Bearer API key (Authorization: Bearer {API_KEY})'
+  key_types: [workspace-scoped static key, dedicated test/prod keys on request]
+  docs: https://docs.fideo.ai/docs/authorization
+  detail: authentication/fideo-authentication.yml
+
+request_model:
+  name: MultiFieldReq
+  shared_by: [POST /verify, POST /signals]
+  minimum: At least one identifier is required.
+  identifiers:
+  - emails (array)
+  - phones (array, E.164)
+  - ssns (array; supports MD5/SHA256 hashed values)
+  - name (given / middle / family)
+  - location (addressLine1/2, city, region, regionCode, country, countryCode, postalCode)
+  - ipAddress
+  - birthday (YYYY-MM-DD)
+  - sessionId
+  matching: >-
+    Deterministic matching when exact identifiers (e.g. hashed emails) are sent;
+    probabilistic linking when broader context is provided.
+  country_gating:
+    params: [countries, excludedCountries]
+    docs: https://docs.fideo.ai/docs/inputs-and-authorization
+
+response_envelope:
+  verify:
+    fields:
+    - risk (number, 0-1 overall risk score)
+    - checks (array of check objects)
+    check_object: {id, name, description, state, risk, checkPackage}
+    risk_levels: [NONE, LOW, MED, HIGH]
+  signals:
+    shape: Modular signal bundles keyed by domain (person, email, phone, location, ip, professional, social, economic).
+  content_type: application/json
+
+session:
+  concept: >-
+    Multiple queries for one user's workflow can be stitched into a single
+    billable Session via a client-supplied sessionId.
+  docs: https://docs.fideo.ai/docs/session
+
+idempotency:
+  supported: false
+  note: >-
+    No Idempotency-Key header or idempotent-request contract is documented.
+    Verify/Signals are read-style scoring calls with no resource creation to
+    de-duplicate.
+
+pagination:
+  supported: false
+  note: Single-request scoring API; no list endpoints or pagination documented.
+
+rate_limiting:
+  documented: true
+  signal: HTTP 429 Too Many Requests on limit exceed; back off with exponential delay.
+  scope: Limits apply per key and per endpoint; tied to the contracted plan.
+  docs: https://docs.fideo.ai/docs/authorization
+
+versioning:
+  scheme: Unversioned host path (https://api.fideo.ai/verify, /signals)
+  note: No URI/header/date version selector documented; changes tracked via the changelog.
+  changelog: https://docs.fideo.ai/changelog
+
+error_envelope:
+  detail: errors/fideo-problem-types.yml
+  note: Standard HTTP status codes (401/403/429); product-level check results carry per-check risk states.
