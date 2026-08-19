@@ -1,11 +1,9 @@
 generated: '2026-07-19'
 method: derived
 status: candidate
-source: >-
-  Derived from the documented Fideo REST operations (POST /verify, POST /signals)
-  at https://docs.fideo.ai. Fideo publishes no official hosted or packaged MCP
-  server as of 2026-07-19; this is a candidate tool surface, not a shipped
-  server.
+source: Derived from the documented Fideo REST operations (POST /verify, POST /signals) at https://docs.fideo.ai.
+  Fideo publishes no official hosted or packaged MCP server as of 2026-07-19; this is a candidate tool
+  surface, not a shipped server.
 server:
   name: fideo
   transport: http
@@ -13,18 +11,20 @@ server:
   auth: 'Bearer API key (Authorization: Bearer {API_KEY})'
 tools:
 - name: verify_identity
-  description: >-
-    Run Fideo Verify — a real-time suite of identity and fraud-risk checks over a
-    multi-field identifier payload, returning a 0-1 risk score and per-check
-    results.
+  description: Run Fideo Verify — a real-time suite of identity and fraud-risk checks over a multi-field
+    identifier payload, returning a 0-1 risk score and per-check results.
   method: POST
   path: /verify
   source_operation: POST https://api.fideo.ai/verify
 - name: get_signals
-  description: >-
-    Run Fideo Signals — retrieve modular identity-intelligence bundles (person,
-    email, phone, location, IP, professional, social, economic) for a multi-field
-    identifier payload.
+  description: Run Fideo Signals — retrieve modular identity-intelligence bundles (person, email, phone,
+    location, IP, professional, social, economic) for a multi-field identifier payload.
   method: POST
   path: /signals
   source_operation: POST https://api.fideo.ai/signals
+deployment:
+  mode: none
+  verified: derived
+  tools: 2
+  checked: '2026-08-12'
+  source: catalog MCP census
