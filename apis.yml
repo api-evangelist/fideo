@@ -15,6 +15,17 @@ description: >-
   teams for KYC, AML, onboarding, account-takeover, and payment-fraud use cases.
   The REST API is served at https://api.fideo.ai with bearer API-key
   authentication and JSON payloads, and is documented on a ReadMe developer hub.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
